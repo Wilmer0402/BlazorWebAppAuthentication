@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <AuthorizeView>
+                <NotAuthorized>
+                    <span>No est&aacute;s autenticado. Por favor, <a class="fw-bolder" href="/login">haz clic aqu&iacute;</a> para iniciar sesi&oacute;n.</span>
+                </NotAuthorized>
+
+                <Authorized>
+                    @if (context.User.IsInRole("Admin"))
+                    {
+                        <!-- Imagen para Administrador -->
+                        <img src="/AdminImage.jpg" style="max-height:5rem;" alt="Administrador" />
+                        <span>Sesi&oacute;n iniciada como <b>@context.User.Identity.Name</b>. <a class="fw-bolder" href="/logout">Cerrar sesi&oacute;n</a></span>
+                    }
+                    else if (context.User.IsInRole("User"))
+                    {
+                        <!-- Imagen para Usuario -->
+                        <img src="/UserImage2.jpg" style="max-height:5rem;" alt="Usuario" />
+                        <span>Sesi&oacute;n iniciada como <b>@context.User.Identity.Name</b>. <a class="fw-bolder" href="/logout">Cerrar sesi&oacute;n</a></span>
+                    }
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</div>
